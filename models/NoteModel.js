@@ -5,13 +5,7 @@ const {Sequelize, DataTypes} = require('sequelize');
 require('dotenv').config();
 
 
-// Creating Sequelize instance using the MySQL connection from db.js
-// const sequelize = new Sequelize({
-//     dialect: 'mysql',  // specifying the dialect of the database
-//     ...sequelizeConnection  // copying sequalize Connection from db.js
-// });
-
-
+// Creating Sequelize instance for Passing Mysql URL
 sequelize = new Sequelize(process.env.sqlURL,{
     dialect: 'mysql'
 });
@@ -30,7 +24,6 @@ sequelize.sync().then(() => {
 }).catch((error) => {
     console.error(error);
 })
-
 
 
 module.exports = noteModel;
