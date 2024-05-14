@@ -12,6 +12,7 @@ noteRouter.get("/", (req, res) => {
 
 noteRouter.post("/save", async (req, res) => {
     const {title, body, user} = req.body;
+    console.log(title, body, user);
     try {
         let note = new noteModel({title, body, user});
         await note.save();
@@ -25,6 +26,19 @@ noteRouter.post("/save", async (req, res) => {
             status: 0
         })
     }
+})
+
+
+noteRouter.get("/all", async (req, res)=>{
+  try {
+    const notes = await noteModel.findAll();
+    res.send({
+        message: "SuccessFully send",
+        result: notes
+    })
+  } catch (error) {
+    console.log("ERROR: ", error)
+  }
 })
 
 module.exports = noteRouter;

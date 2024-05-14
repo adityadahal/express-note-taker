@@ -16,10 +16,6 @@ app.use(cors({
 }))
 
 
-// app.get("/", (req, res)=>{
-//     res.json({data: "Hello World!"})
-// })
-
 app.listen(port, async() => {
     try {
         await connection;
@@ -28,9 +24,6 @@ app.listen(port, async() => {
         console.log(error);
     }
 
-
-
-    console.log(`listening on port  ${port}`);
 },
 
 
