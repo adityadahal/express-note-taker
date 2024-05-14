@@ -12,7 +12,6 @@ noteRouter.get("/", (req, res) => {
 
 noteRouter.post("/save", async (req, res) => {
     const {title, body, user} = req.body;
-    console.log(title, body, user);
     try {
         let note = new noteModel({title, body, user});
         await note.save();
