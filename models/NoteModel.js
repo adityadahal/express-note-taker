@@ -1,6 +1,7 @@
 // Importing Sequelize and DataTypes from sequelize package
 // Sequelize is ORM for MySql Database
 const {Sequelize, DataTypes} = require('sequelize');
+const userModel = require('./UserModel');
 // const sequelizeConnection = require('../db');
 require('dotenv').config();
 
@@ -13,10 +14,13 @@ sequelize = new Sequelize(process.env.sqlURL,{
 const noteModel = sequelize.define("note", {
     title:{type: DataTypes.STRING, required: true},
     body:{type: DataTypes.STRING, required: true},
-    user:{type: DataTypes.STRING, required: true},
+    userId:{type: DataTypes.INTEGER, required: true,},
 },{
     tableName: 'note'
 })
+
+noteModel.belongsTo(userModel, {foreignKey: 'userId'});
+
 
 
 sequelize.sync().then(() => {
