@@ -1,5 +1,6 @@
 const express = require('express');
 const noteModel = require('../models/NoteModel');
+const userModel = require('../models/UserModel');
 
 
 const noteRouter = express.Router();
@@ -11,9 +12,9 @@ noteRouter.get("/", (req, res) => {
 
 
 noteRouter.post("/save", async (req, res) => {
-    const {title, body, user} = req.body;
+    const {title, body, userId} = req.body;
     try {
-        let note = new noteModel({title, body, user});
+        let note = new noteModel({title, body, userId});
         await note.save();
         res.send({
             message: "Note Saved Successfully",
@@ -30,7 +31,7 @@ noteRouter.post("/save", async (req, res) => {
 
 noteRouter.get("/all", async (req, res)=>{
   try {
-    const notes = await noteModel.findAll();
+    const notes = await noteModel.findAll({include: userModel});
     res.send({
         message: "SuccessFully send",
         result: notes
